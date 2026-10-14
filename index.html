@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stylish: Sprint 1 Demo</title>
+<style>
+:root{--bg:#e9eeed;--card:#fff;--ink:#16302f;--muted:#6b7f7e;--accent:#0f5a57;--on:#fff;--line:#dbe4e3;--chip:#eef3f2;--gold:#c98a12;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1615;--card:#14231f;--ink:#e8f1ef;--muted:#9bb0ad;--accent:#4fc1b6;--on:#0a1a18;--line:#243a36;--chip:#1d332f;--gold:#e8b44a}}
+:root[data-theme="dark"]{--bg:#0c1615;--card:#14231f;--ink:#e8f1ef;--muted:#9bb0ad;--accent:#4fc1b6;--on:#0a1a18;--line:#243a36;--chip:#1d332f;--gold:#e8b44a}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px}
+.phone{width:min(380px,100%);flex:1;max-height:740px;min-height:0;background:var(--card);border:1px solid var(--line);border-radius:26px;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.top{padding:14px 18px 10px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+.logo{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:26px;color:var(--accent);flex:1}
+.top h2{margin:0;font-size:17px;flex:1}
+.back{border:0;background:var(--chip);color:var(--ink);width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer}
+.main{flex:1;overflow-y:auto;min-height:0}
+.sub{padding:12px 18px 4px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 18px 14px}
+.item{cursor:pointer;border:0;background:none;text-align:left;color:inherit;padding:0;font:inherit}
+.tile{aspect-ratio:1/1.1;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.tile svg{width:58%}
+.item b{display:block;font-size:13px;margin-top:6px;font-weight:600}
+.item span{font-size:13px;color:var(--gold);font-weight:700}
+.sk{height:150px;border-radius:14px;background:var(--chip);animation:p 1s infinite alternate}
+@keyframes p{to{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.sk{animation:none}}
+.pager{display:flex;justify-content:center;gap:8px;padding:2px 0 18px}
+.pager i{font-style:normal;min-width:30px;text-align:center;padding:6px 0;border-radius:8px;background:var(--chip);font-size:13px}
+.pager i.on{background:var(--accent);color:var(--on)}
+.hero{margin:14px 18px;border-radius:18px;display:flex;align-items:center;justify-content:center;aspect-ratio:1.2}
+.hero svg{width:44%}
+.info{padding:0 18px 18px}
+.info h1{font-size:21px;margin:0 0 4px}
+.price{font-size:19px;color:var(--gold);font-weight:700}
+.lbl{margin:16px 0 8px;font-size:14px;font-weight:600}
+.sizes{display:flex;gap:8px}
+.sz{width:48px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:none;color:var(--ink);font-size:15px;cursor:pointer}
+.sz.on{background:var(--accent);color:var(--on);border-color:var(--accent)}
+.btn{width:100%;margin-top:20px;padding:15px;border:0;border-radius:14px;background:var(--accent);color:var(--on);font-size:16px;font-weight:700;cursor:pointer}
+.btn:disabled{opacity:.4;cursor:default}
+.hint{font-size:12px;color:var(--muted);margin-top:8px;text-align:center;min-height:16px}
+.row{display:flex;gap:14px;padding:18px;align-items:center;border-bottom:1px solid var(--line)}
+.row .tile{width:84px;aspect-ratio:1;flex:none}
+.row .tile svg{width:60%}
+.row h3{margin:0 0 2px;font-size:15px}
+.row small{color:var(--muted)}
+.qty{display:flex;align-items:center;gap:12px;margin-top:10px}
+.qty button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:none;color:var(--ink);font-size:18px;cursor:pointer}
+.qty output{min-width:18px;text-align:center;font-weight:700;font-size:16px}
+.sum{padding:18px}
+.sum div{display:flex;justify-content:space-between;margin-bottom:8px;color:var(--muted)}
+.sum .tot{color:var(--ink);font-size:20px;font-weight:800;margin-top:12px}
+.bump{animation:b .35s}
+@keyframes b{40%{transform:scale(1.12);color:var(--gold)}}
+.empty{text-align:center;color:var(--muted);padding:70px 30px}
+.nav{display:flex;border-top:1px solid var(--line)}
+.nav button{flex:1;padding:12px 0 14px;border:0;background:none;color:var(--muted);font-size:13px;cursor:pointer;position:relative}
+.nav button.on{color:var(--accent);font-weight:700}
+.badge{position:absolute;top:6px;margin-left:6px;background:var(--gold);color:#fff;border-radius:9px;min-width:18px;padding:1px 5px;font-size:11px}
+.toast{position:absolute;left:50%;bottom:70px;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:9px 16px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.reset{border:0;background:none;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="top" id="top"></div>
+  <div class="main" id="main"></div>
+  <div class="nav"><button id="nh" onclick="go('home')">Home</button><button id="nc" onclick="go('cart')">Cart<span class="badge" id="bd" hidden></span></button></div>
+  <div class="toast" id="toast"></div>
+</div>
+<button class="reset" onclick="reset()">Reset demo</button>
+<script>
+var P=[["Linen Shirt",2500,"#2f7f79"],["Cotton Kurta",3200,"#b5546b"],["Embroidered Kurta",5800,"#3d4f8a"],["Denim Jacket",6400,"#4c6c8c"],["Lawn Suit",4300,"#c98a12"],["Printed Dupatta",1800,"#8a4f9e"],["Polo Shirt",2100,"#3f8f5a"],["Chiffon Dupatta",2400,"#d0675a"],["Shalwar Kameez",4900,"#5b6f4a"],["Casual Tee",1200,"#6d7a86"],["Silk Kurti",5200,"#a23c5e"],["Wool Shawl",3900,"#7b5b3a"],["Formal Shirt",2800,"#2d4f6b"],["Hoodie",3400,"#4a4f7a"],["Cargo Trousers",3100,"#6f6a4a"],["Cotton Trousers",2600,"#8c6f5a"],["Embroidered Abaya",7200,"#2b3a3a"],["Waistcoat",4600,"#7a3b3b"],["Khaddar Shawl",3300,"#9a6a2a"],["Linen Kurta",3600,"#3a7a8a"]];
+var S,t0;
+function shirt(c){return '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 8 8 16l6 12 6-3v31h24V25l6 3 6-12-14-8c-2 5-6 7-10 7s-8-2-10-7z" fill="'+c+'"/></svg>'}
+function tile(i){return '<div class="tile" style="background:'+P[i][2]+'22">'+shirt(P[i][2])+'</div>'}
+function rs(n){return 'Rs '+n.toLocaleString('en-US')}
+function $(i){return document.getElementById(i)}
+function reset(){S={scr:'home',pid:0,size:null,cart:null};t0=performance.now();render()}
+function go(s){S.scr=s;if(s==='home')t0=performance.now();render()}
+function open_(i){S.pid=i;S.size=null;S.scr='detail';render()}
+function pick(z){S.size=z;render()}
+function add(){S.cart={pid:S.pid,size:S.size,qty:1};S.scr='cart';render();toast('Added to cart')}
+function q(d){var c=S.cart;c.qty=Math.max(1,Math.min(10,c.qty+d));render();$('tot').classList.add('bump')}
+function toast(m){var e=$('toast');e.textContent=m;e.classList.add('show');setTimeout(function(){e.classList.remove('show')},1600)}
+function render(){
+  var top=$('top'),m=$('main'),h='';
+  $('nh').className=S.scr==='home'?'on':'';$('nc').className=S.scr==='cart'?'on':'';
+  var n=S.cart?S.cart.qty:0;$('bd').hidden=!n;$('bd').textContent=n;
+  if(S.scr==='home'){
+    top.innerHTML='<div class="logo">Stylish</div>';
+    m.innerHTML='<div class="sub"><span>New arrivals</span><span id="ld">Loading...</span></div><div class="grid">'+Array(6).join('<div class="sk"></div>')+'</div>';
+    setTimeout(function(){
+      if(S.scr!=='home')return;
+      var g='';P.forEach(function(p,i){g+='<button class="item" onclick="open_('+i+')">'+tile(i)+'<b>'+p[0]+'</b><span>'+rs(p[1])+'</span></button>'});
+      m.innerHTML='<div class="sub"><span>New arrivals</span><span id="ld">Loaded in '+((performance.now()-t0)/1000).toFixed(1)+' s</span></div><div class="grid">'+g+'</div><div class="sub" style="justify-content:center">Showing 20 per page</div><div class="pager"><i class="on">1</i><i>2</i><i>3</i></div>';
+    },700);
+  }else if(S.scr==='detail'){
+    var p=P[S.pid];
+    top.innerHTML='<button class="back" onclick="go(\'home\')" aria-label="Back">&larr;</button><h2>Product details</h2>';
+    h='<div class="hero" style="background:'+p[2]+'22">'+shirt(p[2])+'</div><div class="info"><h1>'+p[0]+'</h1><div class="price">'+rs(p[1])+'</div><div class="lbl">Size</div><div class="sizes">';
+    ['S','M','L','XL'].forEach(function(z){h+='<button class="sz'+(S.size===z?' on':'')+'" onclick="pick(\''+z+'\')">'+z+'</button>'});
+    h+='</div><button class="btn" onclick="add()"'+(S.size?'':' disabled')+'>Add to cart</button><div class="hint">'+(S.size?'':'Choose a size to continue')+'</div></div>';
+    m.innerHTML=h;
+  }else{
+    top.innerHTML='<h2>Your cart</h2>';
+    if(!S.cart){m.innerHTML='<div class="empty">Your cart is empty.<br>Pick a product on the Home tab.</div>';return}
+    var c=S.cart,pp=P[c.pid],tot=pp[1]*c.qty;
+    m.innerHTML='<div class="row">'+tile(c.pid)+'<div><h3>'+pp[0]+'</h3><small>Size '+c.size+' &middot; '+rs(pp[1])+' each</small><div class="qty"><button onclick="q(-1)" aria-label="Decrease quantity">&minus;</button><output>'+c.qty+'</output><button onclick="q(1)" aria-label="Increase quantity">+</button></div></div></div><div class="sum"><div><span>Items</span><span>'+c.qty+'</span></div><div class="tot"><span>Total</span><span id="tot">'+rs(tot)+'</span></div><button class="btn" disabled>Checkout (next sprint)</button></div>';
+  }
+}
+reset();
+</script>
+</body>
+</html>
